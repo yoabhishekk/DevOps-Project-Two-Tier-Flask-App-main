@@ -1,0 +1,4 @@
+project_id          = "terraform-demo-499312"
+region              = "us-central1"
+zone                = "us-central1-a"
+ssh_public_key_path = "~/.ssh/id_ed25519.pub"
