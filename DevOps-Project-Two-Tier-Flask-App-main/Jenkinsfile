@@ -12,6 +12,8 @@ pipeline {
             steps {
                 // This tells Jenkins to step inside the nested folder before running Docker
                 dir('DevOps-Project-Two-Tier-Flask-App-main') {
+
+                    sh 'ls -la'
                     
                     // Stop existing containers safely
                     sh 'docker compose down || true'
