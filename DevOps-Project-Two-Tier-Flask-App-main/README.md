@@ -155,21 +155,22 @@ Ensure your GitHub repository contains the following three files.
 #### **Dockerfile**
 This file defines the environment for the Flask application container.
 ```dockerfile
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use a modern, supported Python runtime
+FROM python:3.14-slim
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Install system dependencies required for mysqlclient
-RUN apt-get update && apt-get install -y gcc default-libmysqlclient-dev pkg-config && \
-    rm -rf /var/lib/apt/lists/*
-
-# Copy the requirements file to leverage Docker cache
+# Install system dependencies, install python packages, then clean up build tools
+# (Grouping this saves space and removes the compiler from the final image)
 COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get purge -y --auto-remove gcc pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy the rest of the application code
 COPY . .
