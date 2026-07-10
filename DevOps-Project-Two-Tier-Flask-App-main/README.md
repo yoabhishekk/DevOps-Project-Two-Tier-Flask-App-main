@@ -119,7 +119,7 @@ This document outlines the step-by-step process for deploying a 2-tier web appli
 
 2.  **Add Jenkins Repository and Install:**
     ```bash
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7198F4B714ABFC68
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7198F4B714ABFC68
 echo "deb https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list
 sudo apt update
 sudo apt install jenkins -y
