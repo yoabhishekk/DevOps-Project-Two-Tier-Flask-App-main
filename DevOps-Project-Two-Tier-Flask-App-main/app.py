@@ -47,13 +47,13 @@ if __name__ == '__main__':
     for i in range(30):
         try:
             init_db()
-            print("✅ Connected to MySQL")
+            print(" Connected to MySQL")
             break
         except Exception as e:
             print(f"Waiting for MySQL... Attempt {i+1}/30")
             print(e)
             time.sleep(2)
     else:
-        raise Exception("❌ Could not connect to MySQL after 30 attempts.")
+        raise Exception("Could not connect to MySQL after 30 attempts.")
 
     app.run(host='0.0.0.0', port=5000, debug=True)
