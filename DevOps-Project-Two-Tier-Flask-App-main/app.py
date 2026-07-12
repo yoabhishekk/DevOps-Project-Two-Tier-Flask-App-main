@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_mysqldb import MySQL
 
@@ -43,5 +44,16 @@ def submit():
     return jsonify({'message': new_message})
 
 if __name__ == '__main__':
-    init_db()
+    for i in range(30):
+        try:
+            init_db()
+            print("✅ Connected to MySQL")
+            break
+        except Exception as e:
+            print(f"Waiting for MySQL... Attempt {i+1}/30")
+            print(e)
+            time.sleep(2)
+    else:
+        raise Exception("❌ Could not connect to MySQL after 30 attempts.")
+
     app.run(host='0.0.0.0', port=5000, debug=True)
