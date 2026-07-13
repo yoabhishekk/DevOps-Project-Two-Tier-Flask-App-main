@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     default-libmysqlclient-dev \
     pkg-config \
+    curl \
     && pip install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove gcc pkg-config \
     && rm -rf /var/lib/apt/lists/*
